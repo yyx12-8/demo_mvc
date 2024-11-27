@@ -1,0 +1,39 @@
+server:
+  port: 8181
+
+
+spring:
+  application:
+    name: cloud-customer
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 43.143.236.119:8848
+        username: nacos
+        password: nacos
+        group: DEFAULT_GROUP
+      config:
+        server-addr: 43.143.236.119:8848
+        file-extension: yml
+        namespace: cloud # nacos命名空间
+        group: cloudConfig # 组名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_demo?serverTimezone=UTC
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      max-wait: 60000 # 配置获取连接等待超时时间(毫秒)
+
+
+mybatis:
+  # 扫描映射文件，在resources下创建mapper目录
+  mapper-locations: classpath:mapper/*.xml
+  # 配置别名扫描的包
+  type-aliases-package: com.zk.mapper
+  configuration:
+    # 开启驼峰映射配置
+    map-underscore-to-camel-case: true
